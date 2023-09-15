@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var numeroAleatorio = 0;
-
+  var numeroCliques = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,12 +17,19 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Meu app'),
       ),
       body: Center(
-        child: Text('Número Aleatório: $numeroAleatorio'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Número de cliques: $numeroCliques'),
+            Text('Número aleatório: $numeroAleatorio'),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
             setState(() {
+              numeroCliques++;
               numeroAleatorio = GeradorNumeroAleatorio.geradorNumeroAleatorio();
             });
           }),
