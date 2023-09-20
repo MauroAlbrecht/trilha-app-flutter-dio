@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'home_page.dart';
+import 'login_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.aBeeZeeTextTheme()
       ),
-      home: HomePage(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
