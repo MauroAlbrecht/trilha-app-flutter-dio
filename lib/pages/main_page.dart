@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/pagina1.dart';
 
-import 'ados_cadastrais.dart';
+import 'dados_cadastrais.dart';
 import 'pagina2.dart';
 import 'pagina3.dart';
 
