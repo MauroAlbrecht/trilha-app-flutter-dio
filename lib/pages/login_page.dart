@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
+import 'main_page.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -147,7 +149,10 @@ class _LoginPageState extends State<LoginPage> {
                           if (emailController.text.trim() ==
                               "email@email.com" &&
                               senhaController.text.trim() == "123") {
-
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MainPage()));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
