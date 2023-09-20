@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../custom_components/text_label_custom.dart';
+
 class DadosCadastraisPage extends StatefulWidget {
   const DadosCadastraisPage({Key? key}) : super(key: key);
 
@@ -8,7 +10,9 @@ class DadosCadastraisPage extends StatefulWidget {
 }
 
 class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
-  TextEditingController nomeCotroller = TextEditingController(text: "");
+  var nomeCotroller = TextEditingController(text: "");
+  var dataNascimentoCotroller = TextEditingController(text: "");
+  DateTime? dataNascimento;
 
   @override
   Widget build(BuildContext context) {
@@ -19,24 +23,28 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            TextLabelCustom(
               "Nome",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
             ),
             TextField(
               controller: nomeCotroller,
             ),
-            SizedBox(height: 10,),
-            Text(
-              "Data de nascimento",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+            SizedBox(
+              height: 10,
             ),
+            TextLabelCustom("Data de nascimento"),
             TextField(
-
+              readOnly: true,
+              controller: dataNascimentoCotroller,
+              onTap: () async {
+                var data = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1900, 1, 1), lastDate: DateTime(2023, 10, 23));
+                if (data != null) {
+                  dataNascimentoCotroller.text = data.toString();
+                }
+                data = dataNascimento;
+              },
             ),
-            TextButton(onPressed: () {
-
-            }, child: Text('Salvar'))
+            TextButton(onPressed: () {}, child: Text('Salvar'))
           ],
         ),
       ),
