@@ -94,6 +94,17 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
                         }))
                     .toList()),
             TextLabelCustom(
+              "Tempo de experiencia",
+            ),
+            DropdownButton(
+                value: tempoExperiencia,
+                items: retornaItensMenuExperiencia(20),
+                onChanged: (value) {
+              setState(() {
+                tempoExperiencia = value!;
+              });
+            }),
+            TextLabelCustom(
               "Pretenção salarial. R\$ ${salarioEscolhido.round().toString()}",
             ),
             Slider(
@@ -110,5 +121,18 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
         ),
       ),
     );
+  }
+
+  List<DropdownMenuItem> retornaItensMenuExperiencia(int qtdMaxima) {
+    var itens = <DropdownMenuItem>[];
+    for(var i = 0; i<=qtdMaxima; i++){
+      itens.add(
+          DropdownMenuItem(
+            value: i,
+            child: Text(i==qtdMaxima ? 'Mais de $i anos' : i.toString() ),
+          )
+      );
+    }
+    return itens;
   }
 }
