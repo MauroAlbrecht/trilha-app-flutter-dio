@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/repository/linguagens_repository.dart';
 import 'package:trilhaapp/repository/nivel_repository.dart';
 
 import '../custom_components/text_label_custom.dart';
@@ -14,14 +15,19 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
   var nomeCotroller = TextEditingController(text: "");
   var dataNascimentoCotroller = TextEditingController(text: "");
   DateTime? dataNascimento;
+  var linguagens = [];
   var niveis = [];
   var nivelRepository = NivelRepository();
+  var linguagensRepository = LinguagensRepository();
   var nivelSelecionado = '';
   var salarioEscolhido = 0.0;
   int tempoExperiencia = 0;
+  var linguagensSelecionadas = [];
+
   @override
   void initState() {
     niveis = nivelRepository.retornaNiveis();
+    linguagens = linguagensRepository.retornaLinguagens();
     super.initState();
   }
 
@@ -31,8 +37,7 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
       appBar: AppBar(title: Text("Meus dados")),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             TextLabelCustom(
               "Nome",
@@ -70,12 +75,31 @@ class _DadosCadastraisPageState extends State<DadosCadastraisPage> {
                         }))
                     .toList()),
             const TextLabelCustom(
-              "Tempo de experiência",
+              "Linguagens Preferidas",
             ),
-             TextLabelCustom(
+            Column(
+                children: linguagens
+                    .map((linguagem) => CheckboxListTile(
+                        dense: true,
+                        title: Text(linguagem.toString()),
+                        value: linguagensSelecionadas.contains(linguagem),
+                        onChanged: (bool? val) {
+                          setState(() {
+                            if (val!) {
+                              linguagensSelecionadas.add(linguagem);
+                            } else {
+                              linguagensSelecionadas.remove(linguagem);
+                            }
+                          });
+                        }))
+                    .toList()),
+            TextLabelCustom(
               "Pretenção salarial. R\$ ${salarioEscolhido.round().toString()}",
             ),
-            Slider(min: 0, max: 40000.0, value: salarioEscolhido,
+            Slider(
+                min: 0,
+                max: 40000.0,
+                value: salarioEscolhido,
                 onChanged: (double val) {
                   setState(() {
                     salarioEscolhido = val;
