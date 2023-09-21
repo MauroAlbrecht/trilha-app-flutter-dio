@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/pages/login_page.dart';
 
 import '../pages/dados_cadastrais.dart';
 
@@ -14,23 +15,22 @@ class DrawerCustom extends StatelessWidget {
             onTap: () {
               showModalBottomSheet(
                   context: context,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   builder: (BuildContext bc) {
-                    return Wrap(//wrap agrupa os elmentos e tira o espaço não utilizado antes estava Column
+                    return Wrap(
+                      //wrap agrupa os elmentos e tira o espaço não utilizado antes estava Column
                       children: [
                         ListTile(
                           title: Text('Camêra'),
                           leading: Icon(Icons.camera_alt),
-                          onTap: (){
+                          onTap: () {
                             Navigator.pop(context);
                           },
                         ),
                         ListTile(
                           title: Text('Galeria'),
                           leading: Icon(Icons.photo_album),
-                          onTap: (){
+                          onTap: () {
                             Navigator.pop(context);
                           },
                         )
@@ -71,7 +71,7 @@ class DrawerCustom extends StatelessWidget {
             },
           ),
           Divider(),
-          const SizedBox(
+          SizedBox(
             height: 10,
           ),
           InkWell(
@@ -93,17 +93,19 @@ class DrawerCustom extends StatelessWidget {
             onTap: () {
               showModalBottomSheet(
                   context: context,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   builder: (BuildContext bc) {
                     return Container(
                       padding: EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                       child: Column(
                         children: [
-                          Text('Termos de Privacidade',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                          SizedBox(height: 10,),
+                          Text(
+                            'Termos de Privacidade',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           Text('Nesse pull request, a normalização da data corrigiu o bug na estabilidade do protocolo de transferência de dados. Nesse pull request, a normalização da data corrigiu o bug na estabilidade do protocolo de transferência de dados. Nesse pull request, a normalização da data corrigiu o bug na estabilidade do protocolo de transferência de dados. Nesse pull request, a normalização da data corrigiu o bug na estabilidade do protocolo de transferência de dados. Nesse pull request, a normalização da data corrigiu o bug na estabilidade do protocolo de transferência de dados.')
                         ],
                       ),
@@ -132,6 +134,46 @@ class DrawerCustom extends StatelessWidget {
                   )),
             ),
             onTap: () {},
+          ),
+          const Divider(),
+          InkWell(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Icon(Icons.exit_to_app_sharp),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Sair"),
+                    ],
+                  )),
+            ),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext bc) {
+                    return AlertDialog(
+                      title: Text('Meu App'),
+                      content: Container(
+                        child: Text('Deseja realmente sair do app?'),
+                      ),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                            },
+                            child: Text('Sim')),
+                        TextButton(onPressed: () {
+                          Navigator.pop(context);
+                        }, child: Text('Não')),
+                      ],
+                    );
+                  });
+            },
           ),
         ],
       ),
