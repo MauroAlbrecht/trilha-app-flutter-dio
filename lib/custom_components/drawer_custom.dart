@@ -10,16 +10,45 @@ class DrawerCustom extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.blueAccent),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Image.network(
-                  "https://hermes.digitalinnovation.one/assets/diome/logo.png",
+          InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                  context: context,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  builder: (BuildContext bc) {
+                    return Wrap(//wrap agrupa os elmentos e tira o espaço não utilizado antes estava Column
+                      children: [
+                        ListTile(
+                          title: Text('Camêra'),
+                          leading: Icon(Icons.camera_alt),
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                        ),
+                        ListTile(
+                          title: Text('Galeria'),
+                          leading: Icon(Icons.photo_album),
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                        )
+                      ],
+                    );
+                  });
+            },
+            child: UserAccountsDrawerHeader(
+                decoration: BoxDecoration(color: Colors.blueAccent),
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Image.network(
+                    "https://hermes.digitalinnovation.one/assets/diome/logo.png",
+                  ),
                 ),
-              ),
-              accountName: Text('Mauro Albrecht'),
-              accountEmail: Text('mauroin@gmail.com')),
+                accountName: Text('Mauro Albrecht'),
+                accountEmail: Text('mauroin@gmail.com')),
+          ),
           InkWell(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -48,16 +77,39 @@ class DrawerCustom extends StatelessWidget {
           InkWell(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Container(padding: const EdgeInsets.symmetric(vertical: 5),
-                  width: double.infinity, child: Row(
+              child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  width: double.infinity,
+                  child: Row(
                     children: [
                       Icon(Icons.privacy_tip_outlined),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Text("Termos de uso e privacidade"),
                     ],
                   )),
             ),
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(
+                  context: context,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  builder: (BuildContext bc) {
+                    return Container(
+                      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+                      child: Column(
+                        children: [
+                          Text('Termos de Privacidade',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                          SizedBox(height: 10,),
+                          Text('Nesse pull request, a normalização da data corrigiu o bug na estabilidade do protocolo de transferência de dados. Nesse pull request, a normalização da data corrigiu o bug na estabilidade do protocolo de transferência de dados. Nesse pull request, a normalização da data corrigiu o bug na estabilidade do protocolo de transferência de dados. Nesse pull request, a normalização da data corrigiu o bug na estabilidade do protocolo de transferência de dados. Nesse pull request, a normalização da data corrigiu o bug na estabilidade do protocolo de transferência de dados.')
+                        ],
+                      ),
+                    );
+                  });
+            },
           ),
           const Divider(),
           const SizedBox(
@@ -66,11 +118,15 @@ class DrawerCustom extends StatelessWidget {
           InkWell(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Container(padding: const EdgeInsets.symmetric(vertical: 5),
-                  width: double.infinity, child: Row(
+              child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  width: double.infinity,
+                  child: Row(
                     children: [
                       Icon(Icons.album),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Text("Configurações"),
                     ],
                   )),
