@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../custom_components/app_images.dart';
 
-class ListViewHorizontal extends StatefulWidget {
-  const ListViewHorizontal({Key? key}) : super(key: key);
+class ListViewVertical extends StatefulWidget {
+  const ListViewVertical({Key? key}) : super(key: key);
 
   @override
-  State<ListViewHorizontal> createState() => _ListViewHorizontalState();
+  State<ListViewVertical> createState() => _ListViewVerticalState();
 }
 
-class _ListViewHorizontalState extends State<ListViewHorizontal> {
+class _ListViewVerticalState extends State<ListViewVertical> {
   @override
   Widget build(BuildContext context) {
     return ListView(
