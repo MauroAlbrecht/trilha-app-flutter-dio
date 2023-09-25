@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/card_page.dart';
+import 'package:trilhaapp/pages/list_view_horizontal.dart';
 
 import '../custom_components/drawer_custom.dart';
 import 'dados_cadastrais.dart';
@@ -39,20 +40,21 @@ class _MainPageState extends State<MainPage> {
                   CardPage(),
                   ImageAssetsPage(),
                   ListViewVertical(),
+                  ListViewHorizontal(),
                 ],
               ),
             ),
             BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
                 onTap: (value) {
                   controller.jumpToPage(value);
                 },
                 currentIndex: posicaoPagina,
                 items: [
-                  BottomNavigationBarItem(
-                      label: "Pag1", icon: Icon(Icons.home)),
+                  BottomNavigationBarItem(label: "Pag1", icon: Icon(Icons.home)),
                   BottomNavigationBarItem(label: "Pag2", icon: Icon(Icons.add)),
-                  BottomNavigationBarItem(
-                      label: "Pag3", icon: Icon(Icons.person))
+                  BottomNavigationBarItem(label: "ListView V", icon: Icon(Icons.list)),
+                  BottomNavigationBarItem(label: "ListView H", icon: Icon(Icons.list)),
                 ])
           ],
         ),
