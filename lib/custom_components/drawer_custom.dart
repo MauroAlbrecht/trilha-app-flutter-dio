@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/gerador_numero_aleatorio.dart';
 import 'package:trilhaapp/pages/login_page.dart';
+import 'package:trilhaapp/pages/numeros_aleatorios_page.dart';
 
 import '../pages/dados_cadastrais.dart';
 
@@ -71,7 +73,7 @@ class DrawerCustom extends StatelessWidget {
             },
           ),
           Divider(),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           InkWell(
@@ -81,7 +83,7 @@ class DrawerCustom extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   width: double.infinity,
                   child: Row(
-                    children: [
+                    children: const [
                       Icon(Icons.privacy_tip_outlined),
                       SizedBox(
                         width: 5,
@@ -96,9 +98,9 @@ class DrawerCustom extends StatelessWidget {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   builder: (BuildContext bc) {
                     return Container(
-                      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                       child: Column(
-                        children: [
+                        children: const [
                           Text(
                             'Termos de Privacidade',
                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -138,12 +140,34 @@ class DrawerCustom extends StatelessWidget {
           const Divider(),
           InkWell(
             child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  width: double.infinity,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.numbers),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Gerador de números"),
+                    ],
+                  )),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NumerosAleatoriosPage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   width: double.infinity,
                   child: Row(
-                    children: [
+                    children: const [
                       Icon(Icons.exit_to_app_sharp),
                       SizedBox(
                         width: 5,
@@ -157,19 +181,17 @@ class DrawerCustom extends StatelessWidget {
                   context: context,
                   builder: (BuildContext bc) {
                     return AlertDialog(
-                      title: Text('Meu App'),
-                      content: Container(
-                        child: Text('Deseja realmente sair do app?'),
-                      ),
+                      title: const Text('Meu App'),
+                      content: Text('Deseja realmente sair do app?'),
                       actions: [
                         TextButton(
                             onPressed: () {
                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
                             },
-                            child: Text('Sim')),
+                            child: const Text('Sim')),
                         TextButton(onPressed: () {
                           Navigator.pop(context);
-                        }, child: Text('Não')),
+                        }, child: const Text('Não')),
                       ],
                     );
                   });
