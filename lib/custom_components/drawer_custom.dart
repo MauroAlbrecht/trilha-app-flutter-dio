@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/gerador_numero_aleatorio.dart';
+import 'package:trilhaapp/pages/configuracoes_page.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 import 'package:trilhaapp/pages/numeros_aleatorios_page.dart';
 
@@ -135,7 +135,10 @@ class DrawerCustom extends StatelessWidget {
                     ],
                   )),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CofiguacoesPage()));
+            },
           ),
           const Divider(),
           InkWell(
