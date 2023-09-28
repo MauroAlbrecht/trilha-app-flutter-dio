@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trilhaapp/repository/linguagens_repository.dart';
 import 'package:trilhaapp/repository/nivel_repository.dart';
 
-import '../custom_components/text_label_custom.dart';
+import '../../custom_components/text_label_custom.dart';
 
 class DadosCadastraisPage extends StatefulWidget {
   const DadosCadastraisPage({Key? key}) : super(key: key);

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/pages/configuracoes_hive_page.dart';
-import 'package:trilhaapp/pages/configuracoes_shared_page.dart';
+import 'package:trilhaapp/pages/configuracoes/configuracoes_hive_page.dart';
 import 'package:trilhaapp/pages/login_page.dart';
-import 'package:trilhaapp/pages/numeros_aleatorios_shared_preferences_page.dart';
 
-import '../pages/dados_cadastrais.dart';
-import '../pages/numeros_aleatorios_hive_page.dart';
+import '../pages/configuracoes/configuracoes_shared_page.dart';
+import '../pages/dadoscadastrais/dados_cadastrais_page.dart';
+import '../pages/numerosaleatorios/numeros_aleatorios_hive_page.dart';
+import '../pages/numerosaleatorios/numeros_aleatorios_shared_preferences_page.dart';
 
 class DrawerCustom extends StatelessWidget {
   @override

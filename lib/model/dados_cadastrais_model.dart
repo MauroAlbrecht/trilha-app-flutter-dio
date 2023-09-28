@@ -22,4 +22,15 @@ class DadosCadastraisModel extends HiveObject {
 
   @HiveField(5)
   double? salario;
+
+  DadosCadastraisModel();
+
+  DadosCadastraisModel.vazio(){
+    nome = '';
+    dataNascimento = null;
+    nivelExperiencia = '';
+    linguagens = [];
+    tempoExperiencia = 0;
+    salario = 0;
+  }
 }
