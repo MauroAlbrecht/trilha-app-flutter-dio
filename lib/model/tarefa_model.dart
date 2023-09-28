@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Tarefa{
+class TarefaModel{
   String id = UniqueKey().toString();
   String descricao = '';
   bool concluido = false;
 
-  Tarefa(this.descricao, this.concluido);
+  TarefaModel(this.descricao, this.concluido);
 }

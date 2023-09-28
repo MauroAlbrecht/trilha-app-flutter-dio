@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/model/card_detail.dart';
+import 'package:trilhaapp/model/card_detail_model.dart';
 
 class CardDetailPage extends StatelessWidget {
-  final CardDetail cardDetail;
+  final CardDetailModel cardDetail;
 
   CardDetailPage(this.cardDetail);
 

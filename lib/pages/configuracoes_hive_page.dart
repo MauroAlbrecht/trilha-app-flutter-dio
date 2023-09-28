@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trilhaapp/model/cofiguracoes.dart';
+import 'package:trilhaapp/model/cofiguracoes_model.dart';
 import 'package:trilhaapp/repository/configuracoes_repository.dart';
 
 class CofiguacoesHivePage extends StatefulWidget {
@@ -22,7 +22,7 @@ class _CofiguacoesHivePageState extends State<CofiguacoesHivePage> {
   var nomeController = TextEditingController();
   var alturaController = TextEditingController();
   late CofiguracoesRepository repository;
-  late Configuracoes configuracoes;
+  late ConfiguracoesModel configuracoes;
 
   @override
   void initState() {

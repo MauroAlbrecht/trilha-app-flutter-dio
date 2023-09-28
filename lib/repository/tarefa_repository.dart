@@ -1,9 +1,9 @@
-import 'package:trilhaapp/model/tarefa.dart';
+import 'package:trilhaapp/model/tarefa_model.dart';
 
 class TarefaRepository {
-  final List<Tarefa>  _tarefas = [];
+  final List<TarefaModel>  _tarefas = [];
 
-  Future<List<Tarefa>> getTarefas(bool apenasNaoConcluidos) async {
+  Future<List<TarefaModel>> getTarefas(bool apenasNaoConcluidos) async {
     await Future.delayed(const Duration(seconds: 1));
     if(apenasNaoConcluidos){
       return _tarefas.where((element) => element.concluido == false).toList();
@@ -22,7 +22,7 @@ class TarefaRepository {
     _tarefas.remove(_tarefas.where((element) => element.id == id).first);
   }
 
-  Future<void> addTarefa(Tarefa tarefa) async {
+  Future<void> addTarefa(TarefaModel tarefa) async {
     await Future.delayed(const Duration(seconds: 1));
     _tarefas.add(tarefa);
   }

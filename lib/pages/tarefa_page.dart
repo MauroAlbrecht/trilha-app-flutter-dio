@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/model/tarefa.dart';
+import 'package:trilhaapp/model/tarefa_model.dart';
 import 'package:trilhaapp/repository/tarefa_repository.dart';
 
 class TarefaPage extends StatefulWidget {
@@ -11,7 +11,7 @@ class TarefaPage extends StatefulWidget {
 class _TarefaPageState extends State<TarefaPage> {
   var tarefaRepository = TarefaRepository();
   var descricaoController = TextEditingController();
-  var _tarefas = const <Tarefa>[];
+  var _tarefas = const <TarefaModel>[];
   var apenasConcuidos = false;
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _TarefaPageState extends State<TarefaPage> {
                         child: const Text('Cancelar')),
                     TextButton(
                         onPressed: () async {
-                          await tarefaRepository.addTarefa(Tarefa(descricaoController.text, false));
+                          await tarefaRepository.addTarefa(TarefaModel(descricaoController.text, false));
 
                           setState(() {});
                           Navigator.pop(context);

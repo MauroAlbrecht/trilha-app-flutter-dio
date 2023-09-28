@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/card_detail_page.dart';
 import 'package:trilhaapp/repository/card_detail_repository.dart';
 
-import '../model/card_detail.dart';
+import '../model/card_detail_model.dart';
 
 class CardPage extends StatefulWidget {
   const CardPage({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class CardPage extends StatefulWidget {
 }
 
 class _CardPageState extends State<CardPage> {
-  CardDetail? cardDetail;
+  CardDetailModel? cardDetail;
 
   @override
   void initState() {
