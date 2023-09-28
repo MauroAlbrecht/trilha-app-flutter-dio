@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/model/tarefa_hive_model.dart';
 import 'package:trilhaapp/model/tarefa_model.dart';
+import 'package:trilhaapp/repository/tarefa_hive_repository.dart';
 import 'package:trilhaapp/repository/tarefa_repository.dart';
 
 class TarefaPage extends StatefulWidget {
@@ -9,10 +11,12 @@ class TarefaPage extends StatefulWidget {
 }
 
 class _TarefaPageState extends State<TarefaPage> {
-  var tarefaRepository = TarefaRepository();
+  late TarefaHiveRepository tarefaRepository;
+
   var descricaoController = TextEditingController();
-  var _tarefas = const <TarefaModel>[];
-  var apenasConcuidos = false;
+  var _tarefas = const <TarefaHiveModel>[];
+  var naoConcluido = false;
+
   @override
   void initState() {
     carregaTarefas();
@@ -42,9 +46,9 @@ class _TarefaPageState extends State<TarefaPage> {
                         },
                         child: const Text('Cancelar')),
                     TextButton(
-                        onPressed: () async {
-                          await tarefaRepository.addTarefa(TarefaModel(descricaoController.text, false));
-
+                        onPressed: () {
+                          tarefaRepository.salvar(TarefaHiveModel.criar(descricaoController.text, false));
+                          carregaTarefas();
                           setState(() {});
                           Navigator.pop(context);
                         },
@@ -61,12 +65,17 @@ class _TarefaPageState extends State<TarefaPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Apenas não concluídos', style: TextStyle(fontSize: 18),),
-                Switch(value: apenasConcuidos, onChanged: (bool val) async {
-                  apenasConcuidos  = val;
-                  await carregaTarefas();
-                  setState(() {});
-                })
+                const Text(
+                  'Apenas não concluídos',
+                  style: TextStyle(fontSize: 18),
+                ),
+                Switch(
+                    value: naoConcluido,
+                    onChanged: (bool val) async {
+                      naoConcluido = val;
+                      await carregaTarefas();
+                      setState(() {});
+                    })
               ],
             ),
             Expanded(
@@ -74,19 +83,20 @@ class _TarefaPageState extends State<TarefaPage> {
                   itemCount: _tarefas.length,
                   itemBuilder: (BuildContext bc, int index) {
                     return Dismissible(
-                      key: Key(_tarefas[index].id),
+                      key: Key(_tarefas[index].descricao),
                       child: ListTile(
                         title: Text(_tarefas[index].descricao),
                         trailing: Switch(
-                          onChanged: (bool val) async {
-                            await tarefaRepository.alterar(_tarefas[index].id, val);
+                          onChanged: (bool val) {
+                            _tarefas[index].concluido = val;
+                            tarefaRepository.alterar(_tarefas[index]);
                             setState(() {});
                           },
                           value: _tarefas[index].concluido,
                         ),
                       ),
-                      onDismissed: (DismissDirection dis) async {
-                        await tarefaRepository.remover(_tarefas[index].id);
+                      onDismissed: (DismissDirection dis) {
+                        tarefaRepository.excluir(_tarefas[index]);
                         carregaTarefas();
                       },
                     );
@@ -99,6 +109,8 @@ class _TarefaPageState extends State<TarefaPage> {
   }
 
   Future<void> carregaTarefas() async {
-      _tarefas = await tarefaRepository.getTarefas(apenasConcuidos);
+    tarefaRepository = await TarefaHiveRepository.carregar();
+    _tarefas = tarefaRepository.obterDados(this.naoConcluido);
+    setState(() {});
   }
 }

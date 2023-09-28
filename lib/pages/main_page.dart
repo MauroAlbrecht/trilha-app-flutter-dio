@@ -2,10 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/card_page.dart';
 import 'package:trilhaapp/pages/list_view_horizontal.dart';
-import 'package:trilhaapp/pages/tarefa_page.dart';
+import 'package:trilhaapp/pages/tarefa/tarefa_page.dart';
 
 import '../custom_components/drawer_custom.dart';
-import 'dadoscadastrais/dados_cadastrais_page.dart';
 import 'image_assets_page.dart';
 import 'list_view_vertical.dart';
 
@@ -38,10 +37,10 @@ class _MainPageState extends State<MainPage> {
                   });
                 },
                 children:  [
-                  CardPage(),
-                  ImageAssetsPage(),
-                  ListViewVertical(),
-                  ListViewHorizontal(),
+                  const CardPage(),
+                  const ImageAssetsPage(),
+                  const ListViewVertical(),
+                  const ListViewHorizontal(),
                   TarefaPage(),
                 ],
               ),
