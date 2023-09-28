@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/configuracoes/configuracoes_hive_page.dart';
+import 'package:trilhaapp/pages/dadoscadastrais/dados_cadastrais_hive_page.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 
 import '../pages/configuracoes/configuracoes_shared_page.dart';
@@ -65,13 +66,34 @@ class DrawerCustom extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text("Dados cadastráis"),
+                      Text("Dados cadastrais"),
                     ],
                   )),
             ),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (context) => DadosCadastraisPage()));
+            },
+          ),
+          const Divider(), InkWell(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 5),
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Icon(Icons.person),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Dados cadastrais - HIVE "),
+                    ],
+                  )),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => DadosCadastraisHivePage()));
             },
           ),
           const Divider(),
@@ -127,7 +149,7 @@ class DrawerCustom extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text("Configurações(Shared)"),
+                      Text("Configurações - SHARED"),
                     ],
                   )),
             ),
@@ -149,7 +171,7 @@ class DrawerCustom extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text("Configurações(HIVE)"),
+                      Text("Configurações - HIVE"),
                     ],
                   )),
             ),
@@ -171,7 +193,7 @@ class DrawerCustom extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text("Gerador de números(Shared)"),
+                      Text("Gerador de números - SHARED"),
                     ],
                   )),
             ),
@@ -193,7 +215,7 @@ class DrawerCustom extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text("Gerador de números(Hive)"),
+                      Text("Gerador de números - HIVE"),
                     ],
                   )),
             ),

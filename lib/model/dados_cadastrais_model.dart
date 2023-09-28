@@ -25,7 +25,7 @@ class DadosCadastraisModel extends HiveObject {
 
   DadosCadastraisModel();
 
-  DadosCadastraisModel.vazio(){
+  DadosCadastraisModel.vazio() {
     nome = '';
     dataNascimento = null;
     nivelExperiencia = '';
