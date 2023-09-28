@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/configuracoes_page.dart';
 import 'package:trilhaapp/pages/login_page.dart';
-import 'package:trilhaapp/pages/numeros_aleatorios_page.dart';
+import 'package:trilhaapp/pages/numeros_aleatorios_shared_preferences_page.dart';
 
 import '../pages/dados_cadastrais.dart';
+import '../pages/numeros_aleatorios_hive_page.dart';
 
 class DrawerCustom extends StatelessWidget {
   @override
@@ -153,13 +154,34 @@ class DrawerCustom extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text("Gerador de números"),
+                      Text("Gerador de números(Hive)"),
                     ],
                   )),
             ),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => NumerosAleatoriosPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NumerosAleatoriosHivePage()));
+            },
+          ),          const Divider(),
+          InkWell(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  width: double.infinity,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.numbers),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Gerador de números(Shared)"),
+                    ],
+                  )),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NumerosAleatoriosSharedPreferencesPage()));
             },
           ),
           const Divider(),

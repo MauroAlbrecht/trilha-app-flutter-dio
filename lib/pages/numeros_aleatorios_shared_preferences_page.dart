@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class NumerosAleatoriosPage extends StatefulWidget {
+class NumerosAleatoriosSharedPreferencesPage extends StatefulWidget {
   @override
-  _NumerosAleatoriosPageState createState() => _NumerosAleatoriosPageState();
+  _NumerosAleatoriosSharedPreferencesPageState createState() => _NumerosAleatoriosSharedPreferencesPageState();
 }
 
-class _NumerosAleatoriosPageState extends State<NumerosAleatoriosPage> {
+class _NumerosAleatoriosSharedPreferencesPageState extends State<NumerosAleatoriosSharedPreferencesPage> {
   int? numeroGerado = 0;
   final CHAVE_NUMERO_ALEATORIO = 'numero_aleatorio';
 

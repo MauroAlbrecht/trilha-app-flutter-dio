@@ -52,7 +52,7 @@ class _MainPageState extends State<MainPage> {
                   controller.jumpToPage(value);
                 },
                 currentIndex: posicaoPagina,
-                items: [
+                items: const [
                   BottomNavigationBarItem(label: "Pag1", icon: Icon(Icons.home)),
                   BottomNavigationBarItem(label: "Pag2", icon: Icon(Icons.add)),
                   BottomNavigationBarItem(label: "ListView V", icon: Icon(Icons.person_outline_outlined)),
