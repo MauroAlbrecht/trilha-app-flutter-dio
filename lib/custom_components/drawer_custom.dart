@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/pages/configuracoes_page.dart';
+import 'package:trilhaapp/pages/configuracoes_hive_page.dart';
+import 'package:trilhaapp/pages/configuracoes_shared_page.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 import 'package:trilhaapp/pages/numeros_aleatorios_shared_preferences_page.dart';
 
@@ -73,10 +74,7 @@ class DrawerCustom extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context) => DadosCadastraisPage()));
             },
           ),
-          Divider(),
-          const SizedBox(
-            height: 10,
-          ),
+          const Divider(),
           InkWell(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -117,9 +115,6 @@ class DrawerCustom extends StatelessWidget {
             },
           ),
           const Divider(),
-          const SizedBox(
-            height: 10,
-          ),
           InkWell(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -127,18 +122,62 @@ class DrawerCustom extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   width: double.infinity,
                   child: Row(
-                    children: [
+                    children: const [
                       Icon(Icons.album),
                       SizedBox(
                         width: 5,
                       ),
-                      Text("Configurações"),
+                      Text("Configurações(Shared)"),
                     ],
                   )),
             ),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CofiguacoesPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CofiguacoesSharedPage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  width: double.infinity,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.album),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Configurações(HIVE)"),
+                    ],
+                  )),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CofiguacoesHivePage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  width: double.infinity,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.numbers),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Gerador de números(Shared)"),
+                    ],
+                  )),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NumerosAleatoriosSharedPreferencesPage()));
             },
           ),
           const Divider(),
@@ -161,27 +200,6 @@ class DrawerCustom extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (context) => NumerosAleatoriosHivePage()));
-            },
-          ),          const Divider(),
-          InkWell(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  width: double.infinity,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.numbers),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("Gerador de números(Shared)"),
-                    ],
-                  )),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => NumerosAleatoriosSharedPreferencesPage()));
             },
           ),
           const Divider(),
@@ -214,9 +232,11 @@ class DrawerCustom extends StatelessWidget {
                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
                             },
                             child: const Text('Sim')),
-                        TextButton(onPressed: () {
-                          Navigator.pop(context);
-                        }, child: const Text('Não')),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Não')),
                       ],
                     );
                   });

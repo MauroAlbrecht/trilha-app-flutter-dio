@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trilhaapp/model/cofiguracoes.dart';
+import 'package:trilhaapp/repository/configuracoes_repository.dart';
 
-class CofiguacoesPage extends StatefulWidget {
+class CofiguacoesHivePage extends StatefulWidget {
   @override
-  _CofiguacoesPageState createState() => _CofiguacoesPageState();
+  _CofiguacoesHivePageState createState() => _CofiguacoesHivePageState();
 }
 
-class _CofiguacoesPageState extends State<CofiguacoesPage> {
+class _CofiguacoesHivePageState extends State<CofiguacoesHivePage> {
   final CHAVE_NOME_USUARIO = 'nome_usuario';
   final CHAVE_MODO_ESCURO = 'modo_escuro';
   final CHAVE_RECEBER_NOTIFICACAO = 'receber_notificacao';
@@ -19,6 +21,8 @@ class _CofiguacoesPageState extends State<CofiguacoesPage> {
   late SharedPreferences storage;
   var nomeController = TextEditingController();
   var alturaController = TextEditingController();
+  late CofiguracoesRepository repository;
+  late Configuracoes configuracoes;
 
   @override
   void initState() {
@@ -31,7 +35,7 @@ class _CofiguacoesPageState extends State<CofiguacoesPage> {
 
 
     return Scaffold(
-        appBar: AppBar(title: Text('Configurações')),
+        appBar: AppBar(title: Text('Configurações - HIVE')),
         body: ListView(
           children: [
             TextField(
@@ -61,10 +65,13 @@ class _CofiguacoesPageState extends State<CofiguacoesPage> {
                 }),
             TextButton(onPressed: () async {
 
-              await storage.setString(CHAVE_NOME_USUARIO, nomeController.text);
-              await storage.setDouble(CHAVE_ALTURA, double.tryParse(alturaController.text) ?? 0);
-              await storage.setBool(CHAVE_MODO_ESCURO, temaEscuro);
-              await storage.setBool(CHAVE_RECEBER_NOTIFICACAO, receberNotificacoes);
+              configuracoes.nomeUsuario = nomeController.text;
+              configuracoes.altura = double.tryParse(alturaController.text) ?? 0;
+              configuracoes.temaEscuro = temaEscuro;
+              configuracoes.receberNotificacao = receberNotificacoes;
+
+              repository.salvar(configuracoes);
+
               Navigator.pop(context);
 
             }, child: const Text('Salvar'))
@@ -73,11 +80,12 @@ class _CofiguacoesPageState extends State<CofiguacoesPage> {
   }
 
   void carregar() async {
-    storage = await SharedPreferences.getInstance();
-    nomeController.text = storage.getString(CHAVE_NOME_USUARIO) ?? '';
-    alturaController.text = (storage.getDouble(CHAVE_ALTURA) ?? '').toString();
-    temaEscuro = storage.getBool(CHAVE_MODO_ESCURO) ?? false;
-    receberNotificacoes = storage.getBool(CHAVE_RECEBER_NOTIFICACAO) ?? false;
+    repository = await CofiguracoesRepository.carregar();
+    configuracoes = repository.obterDados();
+    nomeController.text = configuracoes.nomeUsuario;
+    alturaController.text = configuracoes.nomeUsuario;
+    temaEscuro = configuracoes.temaEscuro;
+    receberNotificacoes = configuracoes.receberNotificacao;
     setState(() {});
   }
 }
