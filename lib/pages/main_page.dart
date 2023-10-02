@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/card_page.dart';
 import 'package:trilhaapp/pages/list_view_horizontal.dart';
-import 'package:trilhaapp/pages/tarefa/tarefa_page.dart';
+import 'package:trilhaapp/pages/tarefa/tarefa_hive_page.dart';
+import 'package:trilhaapp/pages/tarefa/tarefa_sqlite_page.dart';
 
 import '../custom_components/drawer_custom.dart';
 import 'image_assets_page.dart';
@@ -38,10 +39,11 @@ class _MainPageState extends State<MainPage> {
                 },
                 children:  [
                   const CardPage(),
-                  const ImageAssetsPage(),
+               //   const ImageAssetsPage(),
                   const ListViewVertical(),
                   const ListViewHorizontal(),
-                  TarefaPage(),
+                  TarefaHivePage(),
+                  TarefaSqlitePage(),
                 ],
               ),
             ),
@@ -53,10 +55,11 @@ class _MainPageState extends State<MainPage> {
                 currentIndex: posicaoPagina,
                 items: const [
                   BottomNavigationBarItem(label: "Pag1", icon: Icon(Icons.home)),
-                  BottomNavigationBarItem(label: "Pag2", icon: Icon(Icons.add)),
+                 // BottomNavigationBarItem(label: "Pag2", icon: Icon(Icons.add)),
                   BottomNavigationBarItem(label: "ListView V", icon: Icon(Icons.person_outline_outlined)),
                   BottomNavigationBarItem(label: "ListView H", icon: Icon(Icons.image)),
-                  BottomNavigationBarItem(label: "Tarefa", icon: Icon(Icons.list)),
+                  BottomNavigationBarItem(label: "Tarefa(hive)", icon: Icon(Icons.list)),
+                  BottomNavigationBarItem(label: "Tarefa(sqlite)", icon: Icon(Icons.list)),
                 ])
           ],
         ),

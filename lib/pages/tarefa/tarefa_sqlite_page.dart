@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/model/tarefa_hive_model.dart';
-import 'package:trilhaapp/model/tarefa_model.dart';
+import 'package:trilhaapp/model/tarefa_model_sqlite.dart';
 import 'package:trilhaapp/repository/tarefa_hive_repository.dart';
-import 'package:trilhaapp/repository/tarefa_repository.dart';
+import 'package:trilhaapp/sqlite/tarefa_sqlite_repository.dart';
 
-class TarefaPage extends StatefulWidget {
+class TarefaSqlitePage extends StatefulWidget {
   @override
-  _TarefaPageState createState() => _TarefaPageState();
+  _TarefaSqlitePageState createState() => _TarefaSqlitePageState();
 }
 
-class _TarefaPageState extends State<TarefaPage> {
-  late TarefaHiveRepository tarefaRepository;
+class _TarefaSqlitePageState extends State<TarefaSqlitePage> {
+  TarefaSqliteRepository tarefaRepository = TarefaSqliteRepository();
 
   var descricaoController = TextEditingController();
-  var _tarefas = const <TarefaHiveModel>[];
+  var _tarefas = const <TarefaModelSqlite>[];
   var naoConcluido = false;
 
   @override
@@ -47,7 +47,7 @@ class _TarefaPageState extends State<TarefaPage> {
                         child: const Text('Cancelar')),
                     TextButton(
                         onPressed: () {
-                          tarefaRepository.salvar(TarefaHiveModel.criar(descricaoController.text, false));
+                          tarefaRepository.salvar(TarefaModelSqlite(0, descricaoController.text, false));
                           carregaTarefas();
                           setState(() {});
                           Navigator.pop(context);
@@ -89,14 +89,14 @@ class _TarefaPageState extends State<TarefaPage> {
                         trailing: Switch(
                           onChanged: (bool val) {
                             _tarefas[index].concluido = val;
-                            tarefaRepository.alterar(_tarefas[index]);
+                            tarefaRepository.update(_tarefas[index]);
                             setState(() {});
                           },
                           value: _tarefas[index].concluido,
                         ),
                       ),
                       onDismissed: (DismissDirection dis) {
-                        tarefaRepository.excluir(_tarefas[index]);
+                        tarefaRepository.delete(_tarefas[index].id);
                         carregaTarefas();
                       },
                     );
@@ -109,8 +109,7 @@ class _TarefaPageState extends State<TarefaPage> {
   }
 
   Future<void> carregaTarefas() async {
-    tarefaRepository = await TarefaHiveRepository.carregar();
-    _tarefas = tarefaRepository.obterDados(this.naoConcluido);
+    _tarefas = await tarefaRepository.getListDados(naoConcluido);
     setState(() {});
   }
 }
